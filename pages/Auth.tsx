@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Input from '@/components/Input'
 
 const Auth = () => {
 const [email, setEmail] = useState('');
 const [name, setName] = useState('');
 const [password, setPassword] = useState('');
+
+const [variant, setvariant] = useState('login');
+
+const toggleVariant = useCallback( () => {
+    setvariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login' )
+},[]
+) 
+
 
 
   return (
@@ -16,15 +24,17 @@ const [password, setPassword] = useState('');
     <div className='flex justify-center'> 
     <div className='bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full'>
         <h2 className='text-white text-4xl mb-8 font-semibold'>
-         Sign In
+        { variant === 'login' ? 'Sign in' : 'Register'}
         </h2>
             <div className='flex flex-col gap-4 '>
+               {variant === 'register' && ( 
                 <Input 
                 label='Username'
                 onChange={(e: any)=> {setName(e.target.value)}}
                 id="name"
                 value={name}
                 />
+                )}
                 <Input 
                 label='Email'
                 onChange={(e: any)=> {setEmail(e.target.value)}}
@@ -52,19 +62,20 @@ const [password, setPassword] = useState('');
             transition 
             '> 
 {/* transiton will make the color change smoother */}
-Login
+{variant === 'login' ? 'Login' : 'Sign up' }
             </button>
             <p className='
             text-neutral-500 mt-12
             '>
-              First time using netflix? 
+              { variant === 'login' ? 'First time using netflix?' : 'Already have an account?'} 
               <span className='
               text-white
               ml-1
               hover:underline
               cursor-pointer
-              '>
-                 Create an Account
+              '
+              onClick={toggleVariant}>
+                 { variant === 'login' ? 'Create an account' : 'Login' }
               </span>
             </p>
     </div>
