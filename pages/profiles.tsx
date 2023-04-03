@@ -77,7 +77,6 @@ const { data: user } = useCurrentUser();
                        overflow-hidder
                        ">
                             <img src="/images/default-blue.png" alt="profile"/>
-
                        </div>
                        <div
                        className="
