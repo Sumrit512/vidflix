@@ -3,15 +3,22 @@ import NavbarItem from './NavbarItem'
 import { BsChevronDown, BsSearch, BsBell} from 'react-icons/bs'
 import MobileMenu from './MobileMenu'
 import {useState, useCallback} from 'react'
+import AccountMenu from './AccountMenu'
 
 const Navbar = () => {
 
 const [showMobileMenu, setShowMobileMenu]  = useState(false) 
+const [showAccountMenu, setShowAccountMenu] = useState(false);
+
 const toggleMobileMenu = useCallback(() => {
 setShowMobileMenu((current) => !current)
 },[])
 
-  return (
+const toggleAccountMenu = useCallback(() => {
+    setShowAccountMenu((current) => !current)
+},[])
+
+  return ( 
     <nav className='
     w-full
     fixed 
@@ -84,7 +91,6 @@ setShowMobileMenu((current) => !current)
           ml-auto
           gap-7
           items-center
-
           '>
                      <div className='
                      text-gray-200
@@ -102,9 +108,40 @@ setShowMobileMenu((current) => !current)
                      '>
                       <BsBell />
                      </div>
+                     <div
+                     
+                       onClick={toggleAccountMenu}
+                     className='
+                     flex
+                     flex-row
+                     items-center
+                     gap-2
+                     cursor-pointer
+                     relative
+                     '>
+                        <div className='
+                         w-6
+                         h-6
+                         lg:w-10
+                         lg:h-10 
+                         rounded-md
+                         overflow-hidden
+                         '>
+                            <img src='/images/default-blue.png' alt='profile'/>
+                        </div>
+                        <BsChevronDown 
+                        className={
+                            `text-white
+                            transitiond
+                            ${showAccountMenu ? 'rotate-180': 'rotate-0'}
+                            `
+                        }
+                        />
+                        <AccountMenu visible={showAccountMenu}/> 
+                     </div>
           </div>
      </div>
-    </nav>
+    </nav> 
   )
 }
 
