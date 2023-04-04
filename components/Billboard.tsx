@@ -1,10 +1,24 @@
 import useBillboard from '@/hooks/useBillboard'
-import React from 'react'
+import useInfoModal from '@/hooks/useInfoModal';
+import React, {useCallback} from 'react'
 import { AiOutlineInfoCircle } from 'react-icons/ai' 
+import PlayButton from './PlayButton';
 
 
 const Billboard = () => {
+
+const {openModal } =  useInfoModal();
+
 const { data } = useBillboard();
+const handleOpenModal = useCallback(
+  () => {
+    openModal(data?.id)
+     
+  },
+  [openModal, data?.id],
+)
+
+
 
   return (
     <div className='
@@ -70,7 +84,9 @@ const { data } = useBillboard();
              md:mt-4
              gap-3
              '>
+              <PlayButton movieId={data?.id}/>
                      <button
+                     onClick={handleOpenModal}
                      className='
                      bg-white
                      text-white

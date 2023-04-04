@@ -1,5 +1,6 @@
  import React from 'react'
  import { signOut } from 'next-auth/react'
+import useCurrentUser from '@/hooks/useCurrentUser';
 
  interface AccountMenuProps {
     visible?: boolean;
@@ -9,6 +10,7 @@
     visible
  }) => {
 
+   const {data} = useCurrentUser();
     if(!visible) {
         return null
     }
@@ -53,12 +55,11 @@
                  text-sm
                  group-hover/item:underline
                  '>
-                    username
+                    {data?.name}
                  </p>
-                 <div className='
-                 
-                 '>
-                    <hr 
+                 </div>
+              
+                    <hr  
                     className='
                     bg-gray-600
                     border-0
@@ -73,11 +74,11 @@
                     text-white
                     text-sm 
                     hover:underline
-                    '>
+                    '> 
                            Sign out of Netflix
                     </div>
-                 </div>
-                </div>   
+                 
+               
           </div>
     
      </div>
