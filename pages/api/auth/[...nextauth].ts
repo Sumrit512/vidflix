@@ -26,7 +26,7 @@ export default NextAuth({
         },
         password: {
           label: 'Password',
-          type: 'passord'
+          type: 'password'
         }
       },
       async authorize(credentials) {
